@@ -23,14 +23,15 @@ for x in $(find -name "index.md" -not -path '*reveal.js*'); do
     PDF="$(basename $x .md).pdf"
     HTML="$(basename $x .md).html"
 
-    
+    # Markdown to HTML 
     pandoc -t revealjs -f markdown -s $(basename $x) -o $(basename $x .md).html -V theme=serif -i -V slideNumber=true -V history=true --slide-level=1 -V zoomKey="shift" -V previewLinks=true -f markdown+emoji+fancy_lists -V revealjs-url=../../resources/reveal.js/ --katex --css ../../resources/style.css
-    
+    # HTML to PDF
     google-chrome --headless --disable-gpu --print-to-pdf=$PDF file://`pwd`/$HTML?print-pdf
     popd
 done
 
 if [ $PUSH_FILES -ne 0 ]; then
+  # Push files to course webpage so students can view.
   python links.py > links.json
   rsync -zarvm --chmod=o+rx --progress --include="*/" --include="index.pdf" --include="*.java" --include="links.json" --exclude="*" ./* linuxlab:~/public_html/comp1020/
   
