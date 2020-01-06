@@ -24,7 +24,7 @@ for x in $(find -name "index.md" -not -path '*reveal.js*'); do
     HTML="$(basename $x .md).html"
 
     # Markdown to HTML 
-    pandoc -t revealjs -f markdown -s $(basename $x) -o $(basename $x .md).html -V theme=serif -i -V slideNumber=true -V history=true --slide-level=1 -V zoomKey="shift" -V previewLinks=true -f markdown+emoji+fancy_lists -V revealjs-url=../../resources/reveal.js/ --katex --css ../../resources/style.css
+    pandoc -t revealjs -f markdown -s $(basename $x) -o $HTML -V theme=serif -i -V slideNumber=true -V history=true --slide-level=1 -V zoomKey="shift" -V previewLinks=true -f markdown+emoji+fancy_lists -V revealjs-url=../../resources/reveal.js/ --katex --css ../../resources/style.css
     # HTML to PDF
     google-chrome --headless --disable-gpu --print-to-pdf=$PDF file://`pwd`/$HTML?print-pdf
     popd
