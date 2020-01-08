@@ -1,10 +1,12 @@
 #!/bin/bash
 
 PUSH_FILES=0
+BROWSER="google-chrome"
+
 
 usage="Usage: cmd [-p]"
 
-
+# Analysing User Input
 while getopts ":p" opt; do
     case ${opt} in
         p )
@@ -18,24 +20,39 @@ while getopts ":p" opt; do
     esac
 done
 
+# Convering all Markdown files for every lecture to HTML
 for x in $(find -name "index.md" -not -path '*reveal.js*'); do
     pushd $(dirname $x)
     PDF="$(basename $x .md).pdf"
     HTML="$(basename $x .md).html"
 
-    # Markdown to HTML 
+    # Markdown to HTML using pandoc
     pandoc -t revealjs -f markdown -s $(basename $x) -o $HTML -V theme=serif -i -V slideNumber=true -V history=true --slide-level=1 -V zoomKey="shift" -V previewLinks=true -f markdown+emoji+fancy_lists -V revealjs-url=../../resources/reveal.js/ --katex --css ../../resources/style.css
-    # HTML to PDF
-    google-chrome --headless --disable-gpu --print-to-pdf=$PDF file://`pwd`/$HTML?print-pdf
+    
+    # Refresh browser to display changes in open HTML file
+    for x in $(xdotool search --onlyvisible --class $BROWSER); do
+      name=$(xdotool getwindowname $x)
+
+      if [[ $name == *"Introductory Computer Science 2"* ]]; then
+          xdotool windowfocus ${x}
+          xdotool key "ctrl+r"
+      fi
+    done
+    
     popd
 done
 
-if [ $PUSH_FILES -ne 0 ]; then
-  # Push files to course webpage so students can view.
+
+# Convert all HTMLs to PDFs and upload them on the course website
+if [ $PUSH_FILES -ne 0 ]; then 
+  # HTML to PDF
+  google-chrome --headless --disable-gpu --print-to-pdf=$PDF file://`pwd`/$HTML?print-pdf
+  
+  # Generate the directory structure
   python links.py > links.json
+  
+  # Push files to course webpage so students can view.
   rsync -zarvm --chmod=o+rx --progress --include="*/" --include="index.pdf" --include="*.java" --include="links.json" --exclude="*" ./* linuxlab:~/public_html/comp1020/
   
   rm links.json
 fi
-
-
