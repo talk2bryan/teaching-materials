@@ -3,7 +3,7 @@
 }
 
 .reveal h2 {
-    font-size: 1em !important;
+    font-size: 2em !important;
 }
 
 .reveal h3 {
@@ -84,6 +84,18 @@ img {
     max-height: 500px !important;
     width: auto;
     height: auto;
+}
+
+small-img {
+    max-width: 5px !important;
+    max-height: 5px !important;
+    width: 5px;
+    height: 5px;
+}
+
+img[src*="small-img"] {
+    width: 300px;
+    height: 300px;
 }
 
 .small {
