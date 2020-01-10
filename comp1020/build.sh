@@ -42,7 +42,7 @@ for x in $(find -name "index.md" -not -path '*reveal.js*'); do
     # Convert all HTMLs to PDFs as we are getting ready to upload to course website
     if [ $PUSH_FILES -ne 0 ]; then 
       # HTML to PDF using Chrome
-      google-chrome --headless --disable-gpu --print-to-pdf=$PDF file://`pwd`/$HTML?print-pdf
+      $BROWSER --headless --disable-gpu --print-to-pdf=$PDF file://`pwd`/$HTML?print-pdf
     fi
     
     popd
