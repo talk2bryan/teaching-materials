@@ -1,6 +1,8 @@
 images/
 *.pdf
 *.java
+*.java~
+*.class
 *.md
 *.html
 reveal.js
