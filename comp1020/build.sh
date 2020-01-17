@@ -56,7 +56,8 @@ if [ $PUSH_FILES -ne 0 ]; then
   python links.py > links.json
   
   # Push files to course webpage so students can view.
-  rsync -zaurvm --chmod=o+rx --progress --include="*/" --include="index.pdf" --include="*.java" --include="links.json" --exclude="*" ./* linuxlab:~/public_html/comp1020/
+  rsync -zaurvm --chmod=o+rx --progress --include="*/" --include="index.pdf"\
+  --include="*.java" --include="links.json" --exclude="*" ./* linuxlab:~/public_html/comp1020/
   
   rm links.json
 fi
