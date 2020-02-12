@@ -98,6 +98,10 @@ img[src*="small-img"] {
     height: 300px;
 }
 
+img[src*="huge-img"] {
+    transform: scale(1.5);
+}
+
 .small {
     font-size: 60% !important;
 }
