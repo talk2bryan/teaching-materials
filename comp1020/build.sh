@@ -57,7 +57,8 @@ if [ $PUSH_FILES -ne 0 ]; then
   
   # Push files to course webpage so students can view.
   rsync -zaurvm --chmod=o+rx --progress --include="*/" --include="index.pdf"\
-  --include="*.java" --include="links.json" --exclude="*" ./* linuxlab:~/public_html/comp1020/
+  --include="*.java" --include="examples/*.txt" --include="links.json" --exclude="*" ./*\
+  linuxlab:~/public_html/comp1020/
   
   rm links.json
 fi
