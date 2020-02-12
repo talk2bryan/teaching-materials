@@ -6,4 +6,5 @@ video/
 *.class
 *.md
 *.html
+*.txt
 reveal.js
