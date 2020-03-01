@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PUSH_FILES=0
-BROWSER="google-chrome"
+BROWSER="brave-browser"
 
 
 usage="Usage: cmd [-p]"
