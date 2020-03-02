@@ -27,7 +27,10 @@ for x in $(find -name "index.md" -not -path '*reveal.js*'); do
     HTML="$(basename $x .md).html"
 
     # Markdown to HTML using pandoc
-    pandoc -t revealjs -f markdown -s $(basename $x) -o $HTML -V theme=serif -i -V slideNumber=true -V history=true --slide-level=1 -V zoomKey="shift" -V previewLinks=true -f markdown+emoji+fancy_lists -V revealjs-url=../../resources/reveal.js/ --katex --css ./style.css
+    pandoc -t revealjs -f markdown -s $(basename $x) -o $HTML -V theme=serif\
+    -i -V slideNumber=true -V history=true --slide-level=1 -V zoomKey="shift"\
+    -V previewLinks=true -f markdown+emoji+fancy_lists -V\
+    revealjs-url=../../resources/reveal.js/ --katex --css ./style.css
     
     # Refresh browser to display changes in open HTML file
     for x in $(xdotool search --onlyvisible --class $BROWSER); do
@@ -41,7 +44,8 @@ for x in $(find -name "index.md" -not -path '*reveal.js*'); do
     # Convert all HTMLs to PDFs as we are getting ready to upload to course website
     if [ $PUSH_FILES -ne 0 ]; then 
       # HTML to PDF using Chrome
-      $BROWSER --headless --disable-gpu --print-to-pdf=$PDF file://`pwd`/$HTML?print-pdf
+      $BROWSER --headless --disable-gpu --print-to-pdf=$PDF\
+      file://`pwd`/$HTML?print-pdf
     fi
     
     popd
