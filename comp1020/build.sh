@@ -37,7 +37,7 @@ for x in $(find -name "index.md" -not -path '*reveal.js*'); do
       name=$(xdotool getwindowname $x)
 
       if [[ $name == *"Introductory Computer Science 2"* ]]; then
-          xvkbd -window ${x} -text "\Cr"
+          xvkbd -window ${x} -text "\Cr" &> /dev/null
       fi
     done
     
@@ -45,7 +45,7 @@ for x in $(find -name "index.md" -not -path '*reveal.js*'); do
     if [ $PUSH_FILES -ne 0 ]; then 
       # HTML to PDF using Chrome
       $BROWSER --headless --disable-gpu --print-to-pdf=$PDF\
-      file://`pwd`/$HTML?print-pdf
+      file://`pwd`/$HTML?print-pdf &> /dev/null
     fi
     
     popd
