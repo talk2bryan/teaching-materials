@@ -34,8 +34,7 @@ for x in $(find -name "index.md" -not -path '*reveal.js*'); do
       name=$(xdotool getwindowname $x)
 
       if [[ $name == *"Introductory Computer Science 2"* ]]; then
-          xdotool windowfocus ${x}
-          xdotool key "ctrl+r"
+          xvkbd -window ${x} -text "\Cr"
       fi
     done
     
