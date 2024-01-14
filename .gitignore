@@ -4,7 +4,7 @@ video/
 *.java
 *.java~
 *.class
-*.md
 *.html
 *.txt
+index.md
 reveal.js
