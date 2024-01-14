@@ -11,7 +11,7 @@ while getopts ":p" opt; do
     case ${opt} in
         p )
             PUSH_FILES=1
-            echo "Pushing files to server"
+            echo "Generating PDF version of slides and pushing files to server"
             ;;
         \? )
             echo $usage
@@ -30,7 +30,7 @@ for x in $(find -name "index.md" -not -path '*reveal.js*'); do
     pandoc -t revealjs -f markdown -s $(basename $x) -o $HTML -V theme=serif\
     -i -V slideNumber=true -V history=true --slide-level=1 -V zoomKey="shift"\
     -V previewLinks=true -f markdown+emoji+fancy_lists -V\
-    revealjs-url=../../resources/reveal.js/ --katex --css ./style.css
+    revealjs-url=../../resources/reveal.js/ --katex --css ../../resources/style.css
     
     # Refresh browser to display changes in open HTML file
     for x in $(xdotool search --onlyvisible --class $BROWSER); do
