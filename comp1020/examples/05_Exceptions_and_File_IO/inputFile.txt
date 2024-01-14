@@ -1,0 +1,4 @@
+this is a sentence
+this           is        another      sentence     with lots    of        spaces
+            I have a huge block of leading whitespace
+I have tonnes of whitespace at the end of me                                    
